@@ -51,17 +51,17 @@ class App extends React.Component {
   }
 
   handleEditorMaximize() {
-    this.setState({
-      editorMaximized: !this.state.editorMaximized });
+    this.setState(state => ({
+      editorMaximized: !state.editorMaximized }));
   }
 
   handlePreviewMaximize() {
-    this.setState({
-      previewMaximized: !this.state.previewMaximized });
+    this.setState(state => ({
+      previewMaximized: !state.previewMaximized }));
   }
 
   render() {
-    const classes = this.state.editorMaximized
+    const [editorClass, previewClass, icon] = this.state.editorMaximized
       ? ['editorWrap maximized', 'previewWrap hide', 'fa fa-compress']
       : this.state.previewMaximized
         ? ['editorWrap hide', 'previewWrap maximized', 'fa fa-compress']
@@ -69,12 +69,12 @@ class App extends React.Component {
 
     return (
       <div>
-        <div className={classes[0]}>
-          <Toolbar icon={classes[2]} onClick={this.handleEditorMaximize} text="Editor"/>
+        <div className={editorClass}>
+          <Toolbar icon={icon} onClick={this.handleEditorMaximize} text="Editor"/>
           <Editor markdown={this.state.markdown} onChange={this.handleChange}/>
         </div>
-        <div className={classes[1]}>
-          <Toolbar icon={classes[2]} onClick={this.handlePreviewMaximize} text="Previewer"/>
+        <div className={previewClass}>
+          <Toolbar icon={icon} onClick={this.handlePreviewMaximize} text="Previewer"/>
           <Preview markdown={this.state.markdown} onChange={this.handleChange}/>
         </div>
       </div>
